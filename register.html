@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Create Account</h2>
+            
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            
+            <form id="register-form">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password (min 6 characters)" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+                </div>
+                
+                <button type="submit" class="auth-btn primary" id="register-btn">
+                    Create Account
+                </button>
+            </form>
+
+            <p class="switch-text">
+                Already have an account? 
+                <a href="login.html" class="auth-link">Sign in</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('register-form');
+            
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+                    const registerBtn = document.getElementById('register-btn');
+                    
+                    if (password !== confirmPassword) {
+                        showError("Passwords don't match");
+                        return;
+                    }
+                    
+                    if (password.length < 6) {
+                        showError("Password must be at least 6 characters");
+                        return;
+                    }
+                    
+                    registerBtn.textContent = 'Creating Account...';
+                    registerBtn.disabled = true;
+                    
+                    registerWithEmail(email, password);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

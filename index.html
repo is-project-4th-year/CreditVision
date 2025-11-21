@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Welcome</h2>
+            <p>Please login or register to continue</p>
+            
+            <div class="auth-buttons">
+                <button onclick="window.location.href='login.html'" class="auth-btn primary">
+                    Login
+                </button>
+                <button onclick="window.location.href='register.html'" class="auth-btn secondary">
+                    Register
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

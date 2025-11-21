@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Login to Your Account</h2>
+            
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="auth-btn primary" id="login-btn">
+                    Login
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <button class="auth-btn google" id="google-login-btn">
+                Sign in with Google
+            </button>
+
+            <p class="switch-text">
+                Don't have an account? 
+                <a href="register.html" class="auth-link">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('login-form');
+            const googleBtn = document.getElementById('google-login-btn');
+            
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const loginBtn = document.getElementById('login-btn');
+                    
+                    loginBtn.textContent = 'Logging in...';
+                    loginBtn.disabled = true;
+                    
+                    loginWithEmail(email, password);
+                });
+            }
+            
+            if (googleBtn) {
+                googleBtn.addEventListener('click', function() {
+                    this.textContent = 'Signing in...';
+                    this.disabled = true;
+                    loginWithGoogle();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
